@@ -1,5 +1,5 @@
 import { Text, View } from "react-native";
-import { useGrid } from "../../../Utils/useGrid";
+import { useGrid } from "../../../Utils/useGrid/useGrid";
 import { useScan } from "../../../Utils/useScan";
 import { gridStyle } from "../style";
 import { colors } from "../../../colors";
@@ -23,16 +23,19 @@ const Grid = () => {
         <View style={gridStyle.row} key={i}>
           {row.map((col, j) => (
             <View style={gridStyle.cell} key={j}>
+              <View style={gridStyle.cell} />
               {col === 0 ? null : (
-                <Text
+                <View
                   style={{
-                    ...gridStyle.text,
+                    ...gridStyle.cell,
                     backgroundColor: colors[col].bg,
-                    color: colors[col].text,
+                    position: "absolute",
                   }}
                 >
-                  {col}
-                </Text>
+                  <Text style={{ ...gridStyle.text, color: colors[col].text }}>
+                    {col}
+                  </Text>
+                </View>
               )}
             </View>
           ))}

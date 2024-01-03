@@ -11,3 +11,5 @@ export type ListNumber =
   | 512
   | 1024
   | 2048;
+
+export type GridType = ListNumber[][];

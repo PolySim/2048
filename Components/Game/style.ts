@@ -27,6 +27,7 @@ export const gridStyle = StyleSheet.create({
     justifyContent: "center",
   },
   cell: {
+    position: "relative",
     width: 60,
     height: 60,
     margin: 5,
@@ -37,12 +38,7 @@ export const gridStyle = StyleSheet.create({
   },
 
   text: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
-    borderRadius: 5,
+    position: "absolute",
     fontFamily: "sans-serif",
     fontSize: 40,
     fontWeight: "bold",
