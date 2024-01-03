@@ -16,17 +16,19 @@ export const useScan = () => {
     onPanResponderRelease: () => {
       const { dx, dy } = gesture;
 
-      if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 0) {
-          setScan("right");
+      if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
+        if (Math.abs(dx) > Math.abs(dy)) {
+          if (dx > 0) {
+            setScan("right");
+          } else {
+            setScan("left");
+          }
         } else {
-          setScan("left");
-        }
-      } else {
-        if (dy > 0) {
-          setScan("bottom");
-        } else {
-          setScan("top");
+          if (dy > 0) {
+            setScan("bottom");
+          } else {
+            setScan("top");
+          }
         }
       }
     },

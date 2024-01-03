@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ListNumber } from "../type";
 
 const createGrid = (length: 3 | 4 | 5 | 6) => {
   const grid: 0[][] = [];
@@ -34,7 +35,7 @@ const getRandomPosition = (grid: number[][]) => {
 };
 
 export const useGrid = (length: 3 | 4 | 5 | 6) => {
-  const [grid, setGrid] = useState<number[][]>(createGrid(length));
+  const [grid, setGrid] = useState<ListNumber[][]>(createGrid(length));
 
   const resetGrid = () => {
     setGrid(createGrid(length));
@@ -43,10 +44,14 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
   const addRandomNumber = () => {
     const position = getRandomPosition(grid);
     const newGrid = [...grid];
-    newGrid[position.x][position.y] = 2;
+    newGrid[position.x][position.y] = Math.random() < 0.7 ? 2 : 4;
     setGrid(newGrid);
-    console.log(newGrid);
   };
+
+  useEffect(() => {
+    addRandomNumber();
+    addRandomNumber();
+  }, []);
 
   return { grid, resetGrid, addRandomNumber };
 };

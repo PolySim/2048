@@ -1,11 +1,17 @@
+import { ListNumber } from "./type";
+
 type Colors = {
-  [key in 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048]: {
+  [key in ListNumber]: {
     bg: string;
     text: string;
   };
 };
 
 export const colors: Colors = {
+  0: {
+    bg: "#eee4da",
+    text: "#776e65",
+  },
   2: {
     bg: "#eee4da",
     text: "#776e65",
