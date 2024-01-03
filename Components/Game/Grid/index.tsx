@@ -6,13 +6,14 @@ import { colors } from "../../../colors";
 import { useEffect } from "react";
 
 const Grid = () => {
-  const { grid, addRandomNumber } = useGrid(4);
+  const { grid, addRandomNumber, handlerMove } = useGrid(4);
   const { panResponder, scan, resetScan } = useScan();
 
   useEffect(() => {
     if (scan) {
-      console.log("scan", scan);
+      handlerMove(scan);
       addRandomNumber();
+      resetScan();
     }
   }, [scan]);
 
