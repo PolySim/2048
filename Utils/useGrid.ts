@@ -75,6 +75,57 @@ const concatHorizontal = (grid: ListNumber[][], left: boolean) => {
   return newGrid;
 };
 
+const moveVertical = (grid: ListNumber[][], top: boolean) => {
+  const newGrid: ListNumber[][] = [...grid];
+  for (let i = 0; i < grid.length; i++) {
+    const column = grid.map((row) => row[i]).filter((cell) => cell !== 0);
+    const columnReverse = [...column].reverse();
+
+    for (let j = 0; j < grid[i].length; j++) {
+      if (top) {
+        newGrid[j][i] = j < column.length ? column[j] : 0;
+      } else {
+        newGrid[j][i] =
+          j < grid[i].length - column.length
+            ? 0
+            : columnReverse[grid[i].length - j - 1];
+      }
+    }
+  }
+  return newGrid;
+};
+
+const concatVertical = (grid: ListNumber[][], top: boolean) => {
+  const newGrid = [...grid];
+  let pass = false;
+  for (let i = 0; i < grid.length; i++) {
+    const column = grid.map((row) => row[i]);
+
+    for (let j = 0; j < column.length; j++) {
+      if (pass) {
+        pass = false;
+      } else {
+        if (
+          j < column.length - 1 &&
+          column[j] === column[j + 1] &&
+          column[j] !== 0
+        ) {
+          if (top) {
+            newGrid[j][i] = (column[j] * 2) as ListNumber;
+            newGrid[j + 1][i] = 0;
+            pass = true;
+          } else {
+            newGrid[j + 1][i] = (column[j] * 2) as ListNumber;
+            newGrid[j][i] = 0;
+            pass = true;
+          }
+        }
+      }
+    }
+  }
+  return newGrid;
+};
+
 const getRandomPosition = (grid: number[][]) => {
   const availablePositions = getAvailablePosition(grid);
   const randomIndex = Math.floor(Math.random() * availablePositions.length);
@@ -100,8 +151,14 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
   const handlerMove = (direction: "top" | "bottom" | "left" | "right") => {
     switch (direction) {
       case "top":
+        setGrid((curr) => moveVertical(curr, true));
+        setGrid((curr) => concatVertical(curr, true));
+        setGrid((curr) => moveVertical(curr, true));
         break;
       case "bottom":
+        setGrid((curr) => moveVertical(curr, false));
+        setGrid((curr) => concatVertical(curr, false));
+        setGrid((curr) => moveVertical(curr, false));
         break;
       case "left":
         setGrid((curr) => moveHorizontal(curr, true));
