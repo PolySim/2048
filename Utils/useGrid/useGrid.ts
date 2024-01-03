@@ -9,11 +9,11 @@ import {
 import { getRandomPosition } from "./addRandomNumber";
 
 const createGrid = (length: 3 | 4 | 5 | 6) => {
-  const grid: 0[][] = [];
+  const grid: GridType = [];
   for (let i = 0; i < length; i++) {
     grid[i] = [];
     for (let j = 0; j < length; j++) {
-      grid[i][j] = 0;
+      grid[i][j] = { value: 0, translate: null };
     }
   }
   return grid;
@@ -27,7 +27,10 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
     setGrid((curr) => {
       const position = getRandomPosition(curr);
       const newGrid = [...curr];
-      newGrid[position.x][position.y] = Math.random() < 0.7 ? 2 : 4;
+      newGrid[position.x][position.y] = {
+        value: Math.random() < 0.7 ? 2 : 4,
+        translate: "pop",
+      };
       return newGrid;
     });
   };

@@ -1,4 +1,6 @@
-const getAvailablePosition = (grid: number[][]) => {
+import { GridType } from "../../type";
+
+const getAvailablePosition = (grid: GridType) => {
   const availablePositions: { x: number; y: number }[] = [];
 
   for (let i = 0; i < grid.length; i++) {
@@ -6,7 +8,7 @@ const getAvailablePosition = (grid: number[][]) => {
 
     for (let j = 0; j < row.length; j++) {
       const cell = row[j];
-      if (cell === 0) {
+      if (cell.value === 0) {
         availablePositions.push({ x: i, y: j });
       }
     }
@@ -14,7 +16,7 @@ const getAvailablePosition = (grid: number[][]) => {
   return availablePositions;
 };
 
-export const getRandomPosition = (grid: number[][]) => {
+export const getRandomPosition = (grid: GridType) => {
   const availablePositions = getAvailablePosition(grid);
   const randomIndex = Math.floor(Math.random() * availablePositions.length);
   return availablePositions[randomIndex];

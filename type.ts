@@ -12,4 +12,6 @@ export type ListNumber =
   | 1024
   | 2048;
 
-export type GridType = ListNumber[][];
+export type ScanDirection = "top" | "bottom" | "left" | "right" | "pop" | null;
+
+export type GridType = { value: ListNumber; translate: ScanDirection }[][];

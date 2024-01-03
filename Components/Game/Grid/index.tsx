@@ -24,16 +24,18 @@ const Grid = () => {
           {row.map((col, j) => (
             <View style={gridStyle.cell} key={j}>
               <View style={gridStyle.cell} />
-              {col === 0 ? null : (
+              {col.value === 0 ? null : (
                 <View
                   style={{
                     ...gridStyle.cell,
-                    backgroundColor: colors[col].bg,
+                    backgroundColor: colors[col.value].bg,
                     position: "absolute",
                   }}
                 >
-                  <Text style={{ ...gridStyle.text, color: colors[col].text }}>
-                    {col}
+                  <Text
+                    style={{ ...gridStyle.text, color: colors[col.value].text }}
+                  >
+                    {col.value}
                   </Text>
                 </View>
               )}
