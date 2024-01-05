@@ -99,7 +99,6 @@ export const concatVertical = (grid: GridType, top: boolean) => {
               translate: null,
             };
             newGrid[j + 1][i] = { value: 0, translate: null };
-            console.log(newGrid[j][i]);
             pass = true;
           } else {
             newGrid[j + 1][i] = {
