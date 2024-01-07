@@ -14,4 +14,8 @@ export type ListNumber =
 
 export type ScanDirection = "top" | "bottom" | "left" | "right" | "pop" | null;
 
-export type GridType = { value: ListNumber; translate: ScanDirection }[][];
+export type GridType = {
+  value: ListNumber;
+  translate: ScanDirection;
+  numberTranslate: number;
+}[][];

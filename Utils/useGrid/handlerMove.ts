@@ -8,12 +8,15 @@ export const moveHorizontal = (grid: GridType, left: boolean) => {
 
     for (let j = 0; j < grid[i].length; j++) {
       if (left) {
-        newGrid[i][j] = j < row.length ? row[j] : { value: 0, translate: null };
+        newGrid[i][j] =
+          j < row.length
+            ? { ...row[j], translate: null, numberTranslate: 0 }
+            : { value: 0, translate: null, numberTranslate: 0 };
       } else {
         newGrid[i][j] =
           j < grid[i].length - row.length
-            ? { value: 0, translate: null }
-            : rowReverse[grid[i].length - j - 1];
+            ? { value: 0, translate: null, numberTranslate: 0 }
+            : { ...rowReverse[grid[i].length - j - 1], translate: null };
       }
     }
   }
@@ -39,15 +42,21 @@ export const concatHorizontal = (grid: GridType, left: boolean) => {
             newGrid[i][j] = {
               value: (row[j].value * 2) as ListNumber,
               translate: null,
+              numberTranslate: 0,
             };
-            newGrid[i][j + 1] = { value: 0, translate: null };
+            newGrid[i][j + 1] = {
+              value: 0,
+              translate: null,
+              numberTranslate: 0,
+            };
             pass = true;
           } else {
             newGrid[i][j + 1] = {
               value: (row[j].value * 2) as ListNumber,
               translate: null,
+              numberTranslate: 0,
             };
-            newGrid[i][j] = { value: 0, translate: null };
+            newGrid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
             pass = true;
           }
         }
@@ -66,12 +75,14 @@ export const moveVertical = (grid: GridType, top: boolean) => {
     for (let j = 0; j < grid[i].length; j++) {
       if (top) {
         newGrid[j][i] =
-          j < column.length ? column[j] : { value: 0, translate: null };
+          j < column.length
+            ? { ...column[j], translate: null }
+            : { value: 0, translate: null, numberTranslate: 0 };
       } else {
         newGrid[j][i] =
           j < grid[i].length - column.length
-            ? { value: 0, translate: null }
-            : columnReverse[grid[i].length - j - 1];
+            ? { value: 0, translate: null, numberTranslate: 0 }
+            : { ...columnReverse[grid[i].length - j - 1], translate: null };
       }
     }
   }
@@ -97,15 +108,21 @@ export const concatVertical = (grid: GridType, top: boolean) => {
             newGrid[j][i] = {
               value: (column[j].value * 2) as ListNumber,
               translate: null,
+              numberTranslate: 0,
             };
-            newGrid[j + 1][i] = { value: 0, translate: null };
+            newGrid[j + 1][i] = {
+              value: 0,
+              translate: null,
+              numberTranslate: 0,
+            };
             pass = true;
           } else {
             newGrid[j + 1][i] = {
               value: (column[j].value * 2) as ListNumber,
               translate: null,
+              numberTranslate: 0,
             };
-            newGrid[j][i] = { value: 0, translate: null };
+            newGrid[j][i] = { value: 0, translate: null, numberTranslate: 0 };
           }
           pass = true;
         }

@@ -7,13 +7,14 @@ import {
   moveVertical,
 } from "./handlerMove";
 import { getRandomPosition } from "./addRandomNumber";
+import { addHorizontal } from "./addTranslate";
 
 const createGrid = (length: 3 | 4 | 5 | 6) => {
   const grid: GridType = [];
   for (let i = 0; i < length; i++) {
     grid[i] = [];
     for (let j = 0; j < length; j++) {
-      grid[i][j] = { value: 0, translate: null };
+      grid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
     }
   }
   return grid;
@@ -30,6 +31,7 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
       newGrid[position.x][position.y] = {
         value: Math.random() < 0.7 ? 2 : 4,
         translate: "pop",
+        numberTranslate: 0,
       };
       return newGrid;
     });
@@ -38,24 +40,36 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
   const handlerMove = (direction: "top" | "bottom" | "left" | "right") => {
     switch (direction) {
       case "top":
-        setGrid((curr) => moveVertical(curr, true));
-        setGrid((curr) => concatVertical(curr, true));
-        setGrid((curr) => moveVertical(curr, true));
+        setGrid((curr) =>
+          moveVertical(concatVertical(moveVertical(curr, true), true), true),
+        );
         break;
       case "bottom":
-        setGrid((curr) => moveVertical(curr, false));
-        setGrid((curr) => concatVertical(curr, false));
-        setGrid((curr) => moveVertical(curr, false));
+        setGrid((curr) =>
+          moveVertical(concatVertical(moveVertical(curr, false), false), false),
+        );
         break;
       case "left":
-        setGrid((curr) => moveHorizontal(curr, true));
-        setGrid((curr) => concatHorizontal(curr, true));
-        setGrid((curr) => moveHorizontal(curr, true));
+        setGrid((curr) => addHorizontal(curr, true));
+        setTimeout(() => {
+          setGrid((curr) =>
+            moveHorizontal(
+              concatHorizontal(moveHorizontal(curr, true), true),
+              true,
+            ),
+          );
+        }, 200);
         break;
       case "right":
-        setGrid((curr) => moveHorizontal(curr, false));
-        setGrid((curr) => concatHorizontal(curr, false));
-        setGrid((curr) => moveHorizontal(curr, false));
+        setGrid((curr) => addHorizontal(curr, false));
+        setTimeout(() => {
+          setGrid((curr) =>
+            moveHorizontal(
+              concatHorizontal(moveHorizontal(curr, false), false),
+              false,
+            ),
+          );
+        }, 200);
         break;
       default:
         break;

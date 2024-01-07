@@ -12,8 +12,10 @@ const Grid = () => {
   useEffect(() => {
     if (scan) {
       handlerMove(scan);
-      addRandomNumber();
-      resetScan();
+      setTimeout(() => {
+        addRandomNumber();
+        resetScan();
+      }, 200);
     }
   }, [scan]);
 
