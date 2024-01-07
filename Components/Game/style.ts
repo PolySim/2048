@@ -39,7 +39,6 @@ export const gridStyle = StyleSheet.create({
 
   text: {
     position: "absolute",
-    // fontFamily: "sans-serif",
     fontSize: 40,
     fontWeight: "bold",
   },

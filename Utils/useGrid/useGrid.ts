@@ -14,7 +14,7 @@ const createGrid = (length: 3 | 4 | 5 | 6) => {
   for (let i = 0; i < length; i++) {
     grid[i] = [];
     for (let j = 0; j < length; j++) {
-      grid[i][j] = { value: 2, translate: null, numberTranslate: 0 };
+      grid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
     }
   }
   return grid;
@@ -86,8 +86,8 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
   };
 
   useEffect(() => {
-    // addRandomNumber();
-    // addRandomNumber();
+    addRandomNumber();
+    addRandomNumber();
   }, []);
 
   return { grid, addRandomNumber, handlerMove, gridHistory };
