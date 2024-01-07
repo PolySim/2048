@@ -51,12 +51,27 @@ export const concatHorizontal = (grid: GridType, left: boolean) => {
             };
             pass = true;
           } else {
-            newGrid[i][j + 1] = {
-              value: (row[j].value * 2) as ListNumber,
-              translate: null,
-              numberTranslate: 0,
-            };
-            newGrid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
+            if (j < row.length - 2 && row[j + 2].value === row[j + 1].value) {
+              newGrid[i][j + 2] = {
+                value: (row[j].value * 2) as ListNumber,
+                translate: null,
+                numberTranslate: 0,
+              };
+              newGrid[i][j + 1] = {
+                value: row[j].value,
+                translate: null,
+                numberTranslate: 0,
+              };
+              newGrid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
+              j++;
+            } else {
+              newGrid[i][j + 1] = {
+                value: (row[j].value * 2) as ListNumber,
+                translate: null,
+                numberTranslate: 0,
+              };
+              newGrid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
+            }
             pass = true;
           }
         }
@@ -117,12 +132,30 @@ export const concatVertical = (grid: GridType, top: boolean) => {
             };
             pass = true;
           } else {
-            newGrid[j + 1][i] = {
-              value: (column[j].value * 2) as ListNumber,
-              translate: null,
-              numberTranslate: 0,
-            };
-            newGrid[j][i] = { value: 0, translate: null, numberTranslate: 0 };
+            if (
+              j < column.length - 2 &&
+              column[j + 2].value === column[j + 1].value
+            ) {
+              newGrid[j + 2][i] = {
+                value: (column[j].value * 2) as ListNumber,
+                translate: null,
+                numberTranslate: 0,
+              };
+              newGrid[j + 1][i] = {
+                value: column[j].value,
+                translate: null,
+                numberTranslate: 0,
+              };
+              newGrid[j][i] = { value: 0, translate: null, numberTranslate: 0 };
+              j++;
+            } else {
+              newGrid[j + 1][i] = {
+                value: (column[j].value * 2) as ListNumber,
+                translate: null,
+                numberTranslate: 0,
+              };
+              newGrid[j][i] = { value: 0, translate: null, numberTranslate: 0 };
+            }
           }
           pass = true;
         }

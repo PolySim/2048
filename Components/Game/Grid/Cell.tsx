@@ -75,6 +75,7 @@ const Cell = (cell: CellProps) => {
             ...gridStyle.cell,
             backgroundColor: colors[cell.value].bg,
             position: "absolute",
+            zIndex: 100,
             transform: [
               { translateX: transformHorizontal },
               { translateY: transformVertical },
