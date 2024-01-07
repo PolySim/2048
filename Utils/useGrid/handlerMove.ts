@@ -52,18 +52,35 @@ export const concatHorizontal = (grid: GridType, left: boolean) => {
             pass = true;
           } else {
             if (j < row.length - 2 && row[j + 2].value === row[j + 1].value) {
-              newGrid[i][j + 2] = {
-                value: (row[j].value * 2) as ListNumber,
-                translate: null,
-                numberTranslate: 0,
-              };
-              newGrid[i][j + 1] = {
-                value: row[j].value,
-                translate: null,
-                numberTranslate: 0,
-              };
-              newGrid[i][j] = { value: 0, translate: null, numberTranslate: 0 };
-              j++;
+              if (j < row.length - 3 && row[j + 2].value === row[j + 3].value) {
+                newGrid[i][j + 1] = {
+                  value: (row[j].value * 2) as ListNumber,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                newGrid[i][j] = {
+                  value: 0,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+              } else {
+                newGrid[i][j + 2] = {
+                  value: (row[j].value * 2) as ListNumber,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                newGrid[i][j + 1] = {
+                  value: row[j].value,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                newGrid[i][j] = {
+                  value: 0,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                j++;
+              }
             } else {
               newGrid[i][j + 1] = {
                 value: (row[j].value * 2) as ListNumber,
@@ -136,18 +153,38 @@ export const concatVertical = (grid: GridType, top: boolean) => {
               j < column.length - 2 &&
               column[j + 2].value === column[j + 1].value
             ) {
-              newGrid[j + 2][i] = {
-                value: (column[j].value * 2) as ListNumber,
-                translate: null,
-                numberTranslate: 0,
-              };
-              newGrid[j + 1][i] = {
-                value: column[j].value,
-                translate: null,
-                numberTranslate: 0,
-              };
-              newGrid[j][i] = { value: 0, translate: null, numberTranslate: 0 };
-              j++;
+              if (
+                j < column.length - 3 &&
+                column[j + 2].value === column[j + 3].value
+              ) {
+                newGrid[j + 1][i] = {
+                  value: (column[j].value * 2) as ListNumber,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                newGrid[j][i] = {
+                  value: 0,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+              } else {
+                newGrid[j + 2][i] = {
+                  value: (column[j].value * 2) as ListNumber,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                newGrid[j + 1][i] = {
+                  value: column[j].value,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                newGrid[j][i] = {
+                  value: 0,
+                  translate: null,
+                  numberTranslate: 0,
+                };
+                j++;
+              }
             } else {
               newGrid[j + 1][i] = {
                 value: (column[j].value * 2) as ListNumber,
