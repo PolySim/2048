@@ -7,7 +7,7 @@ import {
   moveVertical,
 } from "./handlerMove";
 import { getRandomPosition } from "./addRandomNumber";
-import { addHorizontal } from "./addTranslate";
+import { addHorizontal, addVertical } from "./addTranslate";
 
 const createGrid = (length: 3 | 4 | 5 | 6) => {
   const grid: GridType = [];
@@ -40,14 +40,23 @@ export const useGrid = (length: 3 | 4 | 5 | 6) => {
   const handlerMove = (direction: "top" | "bottom" | "left" | "right") => {
     switch (direction) {
       case "top":
-        setGrid((curr) =>
-          moveVertical(concatVertical(moveVertical(curr, true), true), true),
-        );
+        setGrid((curr) => addVertical(curr, true));
+        setTimeout(() => {
+          setGrid((curr) =>
+            moveVertical(concatVertical(moveVertical(curr, true), true), true),
+          );
+        }, 200);
         break;
       case "bottom":
-        setGrid((curr) =>
-          moveVertical(concatVertical(moveVertical(curr, false), false), false),
-        );
+        setGrid((curr) => addVertical(curr, false));
+        setTimeout(() => {
+          setGrid((curr) =>
+            moveVertical(
+              concatVertical(moveVertical(curr, false), false),
+              false,
+            ),
+          );
+        }, 200);
         break;
       case "left":
         setGrid((curr) => addHorizontal(curr, true));
